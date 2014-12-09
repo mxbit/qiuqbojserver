@@ -8,7 +8,7 @@
 <form id="save_form">
 
 <div class="input-control text">
-    <input type="text" value="Bengaluru" placeholder="Enter city name" name="place_name" id="place_box"/>
+    <input type="text" value="Bengaluru" placeholder="Enter city name" name="place_name" id="place_box" autocomplete="off"/>
 </div>
 
 <div class="input-control text">
@@ -47,12 +47,12 @@
 
 <div class="input-control textarea">
     <label>Short Description</label>
-    <textarea name="short_desc"></textarea>
+    <textarea name="short_desc" maxlength="200"></textarea>
 </div>
 
 <div class="input-control textarea">
     <label>Long Description</label>
-    <textarea name="long_desc"></textarea>
+    <textarea name="long_desc" maxlength="1000"></textarea>
 </div>
 
 <div class="grid">
@@ -70,7 +70,7 @@
   <div class="span6">
     <div class="input-control checkbox">
         <label>
-            <input type="checkbox" name="engilish" />
+            <input type="checkbox" name="english" />
             <span class="check"></span>
             Should speak Engilsh
         </label>
@@ -78,7 +78,15 @@
   </div>
 </div>
 
+<div class="input-control checkbox">
+        <label>
+            <input type="checkbox" name="job_status" />
+            <span class="check"></span>
+            Job status (Active/Draft)
+        </label>
+    </div>     
 
+<br>
 <input type="hidden" name="latlong" id="latlong_id">
 <button id="save_btn" class="btn btn-primary">Save Job</button>
 

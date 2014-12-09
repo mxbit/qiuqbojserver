@@ -9,8 +9,8 @@ var currentPage = window.location.href;
 		$("#map-canvas").height(mapHeight)
 		//Invoking a method in gpam.js
 		initializeGoogleMap()
-		$('#place_box').typeahead( {ajax: 'http://localhost/teletaxi/teletaxiweb/index.php/booking/get_outstation_town',
-		 displayField:'place_name', 
+		$('#place_box').typeahead( {ajax: window.jq.path+'/landing/get_citis',
+		 displayField:'city', 
 		 onSelect: function(item){
 		 	//Invoking a method in gpam.js
 		 	codeAddress(item.text)

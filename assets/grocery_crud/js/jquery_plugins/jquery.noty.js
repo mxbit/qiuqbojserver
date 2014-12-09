@@ -483,9 +483,9 @@ function noty(options) {
 			style: function() {
 				$(this).css({
 					top: 0,
-					left: '5%',
+					right: 0,
 					position: 'fixed',
-					width: '90%',
+					width: '200px',
 					height: 'auto',
 					margin: 0,
 					padding: 0,
@@ -519,14 +519,15 @@ function noty(options) {
 					var selector = this.options.layout.container.selector + ' ' + this.options.layout.parent.selector;
 					switch (this.options.layout.name) {
 						case 'top':
-							$(selector).css({borderRadius: '0px 0px 0px 0px'});
-							$(selector).last().css({borderRadius: '0px 0px 5px 5px'}); break;
+							//$(selector).css({borderRadius: '0px 0px 0px 0px'});
+							//$(selector).last().css({borderRadius: '0px 0px 5px 5px'});
 						case 'topCenter': case 'topLeft': case 'topRight':
 						case 'bottomCenter': case 'bottomLeft': case 'bottomRight':
 						case 'center': case 'centerLeft': case 'centerRight': case 'inline':
 							$(selector).css({borderRadius: '0px 0px 0px 0px'});
-							$(selector).first().css({'border-top-left-radius': '5px', 'border-top-right-radius': '5px'});
-							$(selector).last().css({'border-bottom-left-radius': '5px', 'border-bottom-right-radius': '5px'}); break;
+							//$(selector).first().css({'border-top-left-radius': '5px', 'border-top-right-radius': '5px'});
+							//$(selector).last().css({'border-bottom-left-radius': '5px', 'border-bottom-right-radius': '5px'});
+							 break;
 						case 'bottom':
 							$(selector).css({borderRadius: '0px 0px 0px 0px'});
 							$(selector).first().css({borderRadius: '5px 5px 0px 0px'}); break;
@@ -650,10 +651,10 @@ function noty(options) {
 					this.$message.css({fontWeight: 'bold'}); 
 					this.$buttons.css({borderTop: '1px solid darkred'}); break;
 				case 'information':
-					this.$bar.css({backgroundColor: '#57B7E2', borderColor: '#0B90C4', color: '#FFF'}); 
-					this.$buttons.css({borderTop: '1px solid #0B90C4'}); break;
+					this.$bar.css({backgroundColor: '#60a917', borderColor: '#60a917', color: '#FFF'}); 
+					this.$buttons.css({borderTop: '1px solid #60a917'}); break;
 				case 'success':
-					this.$bar.css({backgroundColor: 'lightgreen', borderColor: '#50C24E', color: 'darkgreen'}); 
+					this.$bar.css({backgroundColor: '#60a917', borderColor: '#497D15', color: '#fff'}); 
 					this.$buttons.css({borderTop: '1px solid #50C24E'});break;
 				default:
 					this.$bar.css({backgroundColor: '#FFF', borderColor: '#CCC', color: '#444'}); break;
