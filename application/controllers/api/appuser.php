@@ -44,7 +44,7 @@ class Appuser extends REST_Controller
             $addr_2 = $this->post('addr_2') ? $this->post('addr_2') : "";
             $alt_phone = $this->post('alt_phone') ? $this->post('alt_phone') : "";
 
-            $update_data = array('customer_addr' => $this->post('addr_1'),
+            $update_data = array('appuser_addr' => $this->post('addr_1'),
                                 'appuser_phone' => $this->post('phone'), 
                                 'appuser_alt_phone' => $alt_phone);
 
