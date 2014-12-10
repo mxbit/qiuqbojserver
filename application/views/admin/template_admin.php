@@ -54,7 +54,7 @@
         <nav class="sidebar light">
             <ul>
                 <li class="title">Quick Links</li>
-                 <li class="stick bg-emerald"><a  href="<?php echo site_url('landing/maps')?>" ><i class="icon-new"></i>Publish Jobs</a></li>
+                 <li class="stick bg-emerald"><a  href="<?php echo site_url('landing/maps')?>" ><i class="icon-new"></i>Create Jobs</a></li>
                  <li class="stick bg-emerald"><a  href="<?php echo site_url('jobs/job_list')?>" ><i class="icon-list"></i>List of Jobs</a></li>
                  <li class="stick bg-emerald"><a  href="<?php echo site_url('auth/logout')?>"><i class="icon-exit"></i>Logout</a></li>
                  <li class="stick bg-emerald"><a  href="<?php echo site_url('landing/admin_home')?>" ><i class="icon-home"></i>Home</a></li>

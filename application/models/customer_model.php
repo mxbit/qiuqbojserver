@@ -14,6 +14,23 @@ class Customer_model extends CI_Model{
         return $query;
     }
 
+     public function has_user_registered($email){
+        $this->db->where('customer_email',$email);
+        $result = $this->db->get($this->__table);
+        return $result->num_rows();     	
+     }
+
+     
+     public function get_user($email){
+        $this->db->where('customer_email',$email);
+        return $this->db->get($this->__table);          
+     }
+
+     public function update_user($email,$update_row)    {
+        $this->db->where('customer_email',$email);
+        return $this->db->update($this->__table, $update_row);   
+    }  
+
           
 
     
