@@ -41,11 +41,32 @@ class Appuser extends REST_Controller
 
         }
         else   {
+            $update_type = $this->post('update_type');
+            //notification
+            if($update_type == 'notification')    {
+                 $update_data = array('appuser_notification' => $this->post('status'),'appuser_radius' => $this->post('radius'));
+            }
+            //geo location
+            else if($update_type == 'geo')   {
+                $update_data = array('appuser_latlong' => $this->post('latlong'),
+                                    'appuser_location' => $this->post('location'),
+                                    'appuser_geo_info' => $this->post('geoinfo'),
+                                    'appuser_radius' => $this->post('radius')
+                                    );
+            }
+            //lookup radius
+            else if($update_type == 'lookup')   {
+                $update_data = array('appuser_radius' => $this->post('radius'));
+            }
+            //address and phone
+            else    {
             $alt_phone = $this->post('alt_phone') ? $this->post('alt_phone') : "";
 
             $update_data = array('appuser_addr' => $this->post('addr_1'),
                                 'appuser_phone' => $this->post('phone'), 
-                                'appuser_alt_phone' => $alt_phone);
+                                'appuser_alt_phone' => $alt_phone);                
+            }
+
 
             $this->cmodel->update_user($email, $update_data);
         }
