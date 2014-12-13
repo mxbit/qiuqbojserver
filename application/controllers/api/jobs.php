@@ -20,7 +20,19 @@ class Jobs extends REST_Controller
 {
 
     public function all_get()   {
-        $this->response( array('result' => 0 ), 200); 
+    	$this->load->model('jobs_model','jmodel');
+    	$places =  explode(" ", $this->get('place'));
+    	$conidtion  = array('jobs_place_name' => $places[0] );
+
+    	$list = $this->jmodel->get_jobs($conidtion);
+    	
+    	if($list->num_rows > 0)	{
+    		$this->response( array('result' => $list->result() , 'status' => 'success' ), 200); 
+    	}
+    	else {
+			$this->response( array('result' => 0 ,'status' => 'fault'), 200); 
+    	}
+        
     }
 
 	

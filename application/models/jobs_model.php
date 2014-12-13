@@ -14,6 +14,12 @@ class Jobs_model extends CI_Model{
         return $query;
     }
 
+    public function get_jobs($condition)	{
+    	$this->db->like($condition);
+        $result = $this->db->get($this->__table);
+        return $result;
+    }
+
           
 
     
