@@ -50,6 +50,7 @@ class Appuser extends REST_Controller
             else if($update_type == 'geo')   {
                 $update_data = array('appuser_latlong' => $this->post('latlong'),
                                     'appuser_location' => $this->post('location'),
+                                    'appuser_place_name' => $this->post('place'),
                                     'appuser_geo_info' => $this->post('geoinfo'),
                                     'appuser_radius' => $this->post('radius')
                                     );

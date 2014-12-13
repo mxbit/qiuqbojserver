@@ -13,7 +13,8 @@ var currentPage = window.location.href;
 		 displayField:'city', 
 		 onSelect: function(item){
 		 	//Invoking a method in gpam.js
-		 	codeAddress(item.text)
+		 	codeAddress(item.text);
+		 	window.jq.place_name = item.text;
 		   }
 		 });
 

@@ -36,6 +36,7 @@ function codeAddress(address) {
           position: results[0].geometry.location
       });
       circle.setCenter(results[0].geometry.location)
+
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -48,6 +49,7 @@ function showNewRect(event) {
   var radius_result = Math.ceil(circle.getRadius()/1000);
   var contentString = /*circle.getCenter().toString()+ '<br>' +*/'Radius '+radius_result + " KM"
   // Set the info window's content and position.
+  window.jq.latlng = circle.getCenter();
   setFormData(radius_result, circle.getCenter().toString());
   infoWindow.setContent(contentString);
   infoWindow.setPosition(circle.getCenter());
@@ -57,6 +59,7 @@ function showNewRect(event) {
 function setFormData(radius,latlng)	{
 	$("#radius_id").val(radius+ "KM");
 	$("#latlong_id").val(latlng);
+
 }
 
 

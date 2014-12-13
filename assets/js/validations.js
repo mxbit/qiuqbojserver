@@ -12,18 +12,8 @@ function initialiseValidations()	{
     	 var $form = $("#save_form");
     	 var validator = validateForm($form.serializeArray());
     	 if(validator.status)	{
-            
-            $.ajax({ type: "POST", url: window.jq.path+'/jobs/save_job', data: validator.item }).done(function( msg ) {
-                if(msg == 1)    {
-                    sweetAlert('', "Your information has been saved successfully.", "success");
-                    $("#save_form")[0].reset()
-                }
-                else    {
-                     sweetAlert('', "There are some problem in the server. Please try again.", "error");
-                }
 
-              });
-
+            getReverseGeoAndSave(validator)
     	 	//console.log()
     	 }
     	 else	{
@@ -44,6 +34,48 @@ $("#save_form").submit(function(e){
     	}
     	return {status:true,item:data}
 
+    }
+
+    function getReverseGeoAndSave(saveObj)    {
+        var geo = window.jq.latlng;
+        var resourceUrl = "http://nominatim.openstreetmap.org/reverse?format=json&";
+        var geo_url = resourceUrl+ "lat="+geo.lat()+"&lon="+geo.lng()+'&zoom=12&email=info@mxbit.co.in';
+        $.ajax({ type: "GET", url: geo_url }).done(function( msg ) {
+            var address = (getBaseAddress(msg.address));
+            saveObj.item.push( {name:'location_name', value: address} );
+            saveJobData(saveObj)
+
+        }).fail(function() {
+            saveObj.item.push( {name:'location_name', value: window.jq.place_name} );
+            saveJobData(saveObj);
+        })
+
+    }
+
+    function saveJobData(saveObj)  {
+    /*************************SAVING STARTS*****************************/
+    $.ajax({ type: "POST", url: window.jq.path+'/jobs/save_job', data: saveObj.item }).done(function( msg ) {
+        if(msg == 1)    {
+            sweetAlert('', "Your information has been saved successfully.", "success");
+            $("#save_form")[0].reset();
+            $('#place_box').val(window.jq.place_name);
+        }
+        else    {
+             sweetAlert('', "There are some problem in the server. Please try again.", "error");
+        }
+
+      });
+    /*************************SAVING ENDS*****************************/
+    }
+
+
+    function getBaseAddress(address)  { 
+        if(address.suburb)   return (address.suburb+(address.county ? ', '+address.county : '' ));
+        else if(address.town) return (address.town+(address.state_district ? ', '+address.state_district : '' ));
+        else if(address.village) return (address.village+(address.state_district ? ', '+address.state_district : '' ));
+        else if(address.county) return address.county;
+        else if(address.state_district) return address.state_district;
+        else return window.jq.place_name;
     }
 
 }

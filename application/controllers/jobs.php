@@ -68,6 +68,7 @@ AJAX REQUESTS
     ,'jobs_radius' =>          (int) $this->input->post("radius")
     ,'jobs_latlong' =>         $this->input->post("latlong")
     ,'jobs_place_name' =>      $this->input->post("place_name")
+    ,'jobs_location' =>      $this->input->post("location_name")
     ,'jobs_remuneration' =>    $this->input->post("remuneration")
     ,'jobs_date' =>            $this->input->post("job_date")
     ,'jobs_time_from' =>       $this->input->post("from_time")

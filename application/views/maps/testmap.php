@@ -8,7 +8,7 @@
 <form id="save_form">
 
 <div class="input-control text">
-    <input type="text" value="Bengaluru" placeholder="Enter city name" name="place_name" id="place_box" autocomplete="off"/>
+    <input type="text" value="" placeholder="Enter city name" name="place_name" id="place_box" autocomplete="off"/>
 </div>
 
 <div class="input-control text">
