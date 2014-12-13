@@ -35,5 +35,23 @@ class Jobs extends REST_Controller
         
     }
 
+
+    public function job_get()   {
+        $this->response( array('result' => 100 ), 200); 
+    }
+
+    public function job_post()  {
+        $this->load->model('jobs_model','jmodel');
+        
+        if($this->post('isapplied') == true)    {
+            $this->jmodel->delete_job( array('save_job_id' => $this->post('id') , 'save_appuser' => $this->post('email') ) );
+        }
+        else {
+            $this->jmodel->save_job( array('save_job_id' => $this->post('id') , 'save_appuser' => $this->post('email') ) );
+        }
+        
+        $this->response( array('result' => 1000, 'id' => $this->post('id') ), 200); 
+    }
+
 	
 }

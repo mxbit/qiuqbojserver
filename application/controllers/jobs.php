@@ -24,6 +24,7 @@ class Jobs extends CI_Controller {
 
       $crud->where('jobs_client',$this->session->userdata('client_id'));
     
+      $crud->display_as('jobs_id','Jobs Id');
       $crud->display_as('jobs_name','Name');
       $crud->display_as('jobs_place_name','Place name');
       $crud->display_as('jobs_radius','Radius');
@@ -35,10 +36,12 @@ class Jobs extends CI_Controller {
 
       $crud->order_by('jobs_id','desc');
 
-      $crud->required_fields('jobs_status');
-      $crud->unset_edit_fields('jobs_client','jobs_user','jobs_latlong','jobs_short_desc','jobs_long_desc','jobs_options','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to');
+      $crud->callback_column('jobs_id',array($this,'view_applied_jobs')); 
 
-      $crud->columns('jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to','jobs_status');
+      $crud->required_fields('jobs_status');
+      $crud->unset_edit_fields('jobs_id','jobs_client','jobs_user','jobs_latlong','jobs_short_desc','jobs_long_desc','jobs_options','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to');
+
+      $crud->columns('jobs_id','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to','jobs_status');
 
       $crud->unset_add();
       //$crud->unset_edit();
@@ -49,6 +52,39 @@ class Jobs extends CI_Controller {
       $this->load->view('admin/template_admin',$data);    
     }
 
+
+  public function view_applied_jobs($value,$row){
+    return '<a class="button mini" href="'.site_url('jobs/jobs_applied/'.$row->jobs_id).'"># '.$row->jobs_id.'</a>';
+  }
+
+   public function jobs_applied()  {
+      $job_id = $this->uri->segment(3, 0);
+
+      $crud = new grocery_CRUD();
+      $crud->set_table('jq_saved_jobs');    
+      $crud->set_subject('Jobs applied for id '.$job_id);
+
+      $crud->where('save_job_id',$job_id);
+    
+      $crud->display_as('save_id','Id');
+      $crud->display_as('save_appuser','App User');
+
+
+      $crud->order_by('save_id','desc');
+
+
+
+
+      $crud->unset_add();
+      $crud->unset_edit();
+
+      $data['gcrud'] = $crud->render();
+
+      $data['content'] = 'jobs/view_applied_jobs_list';  
+      $this->load->view('admin/template_admin',$data);   
+
+
+   }
 
 /**
 AJAX REQUESTS
