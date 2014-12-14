@@ -23,8 +23,10 @@ class Jobs extends CI_Controller {
       $crud->set_subject('Jobs List');
 
       $crud->where('jobs_client',$this->session->userdata('client_id'));
-    
-      $crud->display_as('jobs_id','Jobs Id');
+
+      $crud->callback_column('jobs_client',array($this,'_callback_image_url')); 
+
+      $crud->display_as('jobs_client','Jobs Id');
       $crud->display_as('jobs_name','Name');
       $crud->display_as('jobs_place_name','Place name');
       $crud->display_as('jobs_radius','Radius');
@@ -36,12 +38,12 @@ class Jobs extends CI_Controller {
 
       $crud->order_by('jobs_id','desc');
 
-      $crud->callback_column('jobs_id',array($this,'view_applied_jobs')); 
+      
 
       $crud->required_fields('jobs_status');
-      $crud->unset_edit_fields('jobs_id','jobs_client','jobs_user','jobs_latlong','jobs_short_desc','jobs_long_desc','jobs_options','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to');
+      $crud->unset_edit_fields('jobs_client','jobs_client','jobs_user','jobs_latlong','jobs_short_desc','jobs_long_desc','jobs_options','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to');
 
-      $crud->columns('jobs_id','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to','jobs_status');
+      $crud->columns('jobs_client','jobs_name','jobs_place_name','jobs_radius','jobs_remuneration','jobs_date','jobs_time_from','jobs_time_to','jobs_status');
 
       $crud->unset_add();
       //$crud->unset_edit();
@@ -53,7 +55,8 @@ class Jobs extends CI_Controller {
     }
 
 
-  public function view_applied_jobs($value,$row){
+  public function _callback_image_url($value,$row){
+    // return '<a class="button mini" alt="'.site_url('jobs/jobs_applied/'.$row->jobs_id).'"># '.$row->jobs_id.'</a>';
     return '<a class="button mini" href="'.site_url('jobs/jobs_applied/'.$row->jobs_id).'"># '.$row->jobs_id.'</a>';
   }
 
